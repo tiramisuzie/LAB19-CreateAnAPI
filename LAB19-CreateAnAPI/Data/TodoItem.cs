@@ -7,7 +7,7 @@ namespace LAB19CreateAnAPI.Data
 {
     public class TodoItem
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public string Name { get; set; }
 

@@ -15,6 +15,7 @@ namespace LAB19_CreateAnAPI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().AddXmlDataContractSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -25,9 +26,10 @@ namespace LAB19_CreateAnAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMvc();
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                await context.Response.WriteAsync("MVC didn't find anything");
             });
         }
     }

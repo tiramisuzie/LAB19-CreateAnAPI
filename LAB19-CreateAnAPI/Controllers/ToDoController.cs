@@ -59,8 +59,20 @@ namespace LAB19_CreateAnAPI.Controllers
 
         // PUT api/todo/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Update(long id, TodoItem item)
         {
+            var todo = _context.TodoItems.Find(id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            todo.IsComplete = item.IsComplete;
+            todo.Name = item.Name;
+
+            _context.TodoItems.Update(todo);
+            _context.SaveChanges();
+            return NoContent();
         }
 
         // DELETE api/todo/5

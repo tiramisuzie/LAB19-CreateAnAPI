@@ -1,6 +1,6 @@
 ﻿const uriList = 'api/todolist';
 let todolists = null;
-let selectList = 0;
+let selectList = 1;
 
 $(document).ready(function () {
     getTodoList();

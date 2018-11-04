@@ -26,7 +26,7 @@ function getData() {
             getCount(data.length);
             $.each(data, function (key, item) {
                 const checked = item.isComplete ? 'checked' : '';
-                
+
                 $('<tr><td><input disabled="true" type="checkbox" ' + checked + '></td>' +
                     '<td>' + item.name + '</td>' +
                     '<td><button onclick="editItem(' + item.id + ')">Edit</button></td>' +

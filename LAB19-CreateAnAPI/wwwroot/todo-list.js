@@ -1,5 +1,6 @@
 ﻿const uriList = 'api/todolist';
 let todolists = null;
+let selectList = 0;
 
 $(document).ready(function () {
     getTodoList();
@@ -17,6 +18,7 @@ function getTodoList() {
                     '<td>' + list.name + '</td>' +
                     '<td><button onclick="editList(' + list.id + ')">Edit</button></td>' +
                     '<td><button onclick="deleteList(' + list.id + ')">Delete</button></td>' +
+                    '<td><button onclick="SelectList(' + list.id + ')">Select</button></td>' +
                     '</tr>').appendTo($('#todoLists'));
             });
 
@@ -89,4 +91,9 @@ $('.my-list-form').on('submit', function () {
 
 function closeInput() {
     $('#listEdit').css({ 'display': 'none' });
+}
+
+function SelectList(id) {
+    selectList = id;
+    console.log(id);
 }

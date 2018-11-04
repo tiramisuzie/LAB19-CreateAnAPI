@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using LAB19CreateAnAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,38 +7,38 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LAB19_CreateAnAPI.Controllers
 {
-    [Route("api/Todo")]
+    [Route("api/todolist")]
     [ApiController]
-    public class TodoController : ControllerBase
+    public class ListController : ControllerBase
     {
         private readonly TodoContext _context;
-        
-        public TodoController(TodoContext context)
+
+        public ListController(TodoContext context)
         {
             _context = context;
-            if (_context.TodoItems.Count() == 0)
+            if (_context.TodoList.Count() == 0)
             {
                 // Create a new TodoItem if collection is empty,
                 // which means you can't delete all TodoItems.
-                _context.TodoItems.Add(new TodoItem { Name = "Item1" });
+                _context.TodoList.Add(new TodoList { Name = "DefaultList" });
                 _context.SaveChanges();
             }
         }
 
-        // GET: api/todo
+        // GET: api/todo/list
         [HttpGet]
         [Produces("application/json")]
-        public IEnumerable<TodoItem> Get()
+        public IEnumerable<TodoList> Get()
         {
-            var items = _context.TodoItems;
+            var items = _context.TodoList;
             return items;
         }
 
-        // GET api/todo/{id}
-        [HttpGet("{id}", Name ="GetTodo")]
-        public ActionResult<TodoItem> GetById(long id)
+        // GET api/todo/list/{id}
+        [HttpGet("{id}", Name = "GetList")]
+        public ActionResult<TodoList> GetById(long id)
         {
-            var item = _context.TodoItems.Find(id);
+            var item = _context.TodoList.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -48,53 +46,46 @@ namespace LAB19_CreateAnAPI.Controllers
             return item;
         }
 
-        // POST api/todo
+        // POST api/todo/list
         [HttpPost]
-        public IActionResult Create(TodoItem item)
+        public IActionResult Create(TodoList list)
         {
-            _context.TodoItems.Add(item);
+            _context.TodoList.Add(list);
             _context.SaveChanges();
 
-            return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
+            return CreatedAtRoute("GetList", new { id = list.Id }, list);
         }
 
-        // PUT api/todo/5
+        // PUT api/todo/list/5
         [HttpPut("{id}")]
-        public IActionResult Update(long id, TodoItem item)
+        public IActionResult Update(long id, TodoList item)
         {
-            var todo = _context.TodoItems.Find(id);
+            var todo = _context.TodoList.Find(id);
             if (todo == null)
             {
                 return NotFound();
             }
-
-            todo.IsComplete = item.IsComplete;
+            
             todo.Name = item.Name;
 
-            _context.TodoItems.Update(todo);
+            _context.TodoList.Update(todo);
             _context.SaveChanges();
             return NoContent();
         }
 
-        // DELETE api/todo/5
+        // DELETE api/todo/list/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var todo = _context.TodoItems.Find(id);
+            var todo = _context.TodoList.Find(id);
             if (todo == null)
             {
                 return NotFound();
             }
 
-            _context.TodoItems.Remove(todo);
+            _context.TodoList.Remove(todo);
             _context.SaveChanges();
             return NoContent();
         }
-    }
-
-    public class Value
-    {
-        public int Id { get; set; }
-        public string Text { get; set; }
     }
 }

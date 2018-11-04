@@ -30,9 +30,10 @@ namespace LAB19_CreateAnAPI.Controllers
         // GET: api/todo
         [HttpGet]
         [Produces("application/json")]
-        public IEnumerable<string> Get()
+        public IEnumerable<TodoItem> Get()
         {
-            return new string[] { "value1", "value2" };
+            var items = _context.TodoItems;
+            return items;
         }
 
         // GET api/todo/{id}

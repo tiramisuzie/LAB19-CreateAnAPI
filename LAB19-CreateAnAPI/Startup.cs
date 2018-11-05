@@ -23,7 +23,6 @@ namespace LAB19_CreateAnAPI
         {
             services.AddDbContext<TodoContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc().AddXmlDataContractSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

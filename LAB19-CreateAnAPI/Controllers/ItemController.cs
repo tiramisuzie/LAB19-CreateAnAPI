@@ -35,7 +35,7 @@ namespace LAB19_CreateAnAPI.Controllers
             return items;
         }
 
-        // GET api/todo/item/{id}
+        // GET api/todo/{id}
         [HttpGet("{id}", Name = "GetTodo")]
         public ActionResult<Todo> GetById(long id)
         {
@@ -47,7 +47,7 @@ namespace LAB19_CreateAnAPI.Controllers
             return item;
         }
 
-        // POST api/todo/item
+        // POST api/todo
         [HttpPost]
         public IActionResult Create(Todo item)
         {

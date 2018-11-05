@@ -95,5 +95,6 @@ function closeInput() {
 
 function SelectList(id) {
     selectList = id;
-    console.log(id);
+    getData();
+
 }

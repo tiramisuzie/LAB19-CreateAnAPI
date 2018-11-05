@@ -20,7 +20,7 @@ namespace LAB19_CreateAnAPI.Controllers
             {
                 // Create a new TodoItem if collection is empty,
                 // which means you can't delete all TodoItems.
-                _context.Todos.Add(new Todo { Name = "Item1" });
+                _context.Todos.Add(new Todo { Name = "Item1", ListId = 1 });
                 _context.SaveChanges();
             }
         }

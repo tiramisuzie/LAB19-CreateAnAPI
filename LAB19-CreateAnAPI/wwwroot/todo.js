@@ -13,7 +13,7 @@ function getData() {
             $('#todos').empty();
             $.each(data, function (key, item) {
                 const checked = item.isComplete ? 'checked' : '';
-                if (item.listId === selectList) {
+                if (item.listId === selectList || selectList === 0) {
                     $('<tr><td>' + item.todoList.name + '</td>' +
                         '<td><input disabled="true" type="checkbox" ' + checked + '></td> ' +
                         '<td>' + item.name + '</td>' +

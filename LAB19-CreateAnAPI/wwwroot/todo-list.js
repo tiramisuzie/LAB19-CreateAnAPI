@@ -1,6 +1,6 @@
 ﻿const uriList = 'api/todolist';
 let todolists = null;
-let selectList = 1;
+let selectList = 0;
 
 $(document).ready(function () {
     getTodoList();
@@ -12,6 +12,22 @@ function getTodoList() {
         url: uriList,
         success: function (data) {
             $('#todoLists').empty();
+            if (selectList === 0) {
+                $('<tr>' +
+                    '<td>All</td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td><button disabled onclick="SelectList(0)">Selected</button></td>' +
+                    '</tr>').appendTo($('#todoLists'));
+            }
+            else {
+                $('<tr>' +
+                    '<td>All</td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td><button onclick="SelectList(0)">Select</button></td>' +
+                    '</tr>').appendTo($('#todoLists'));
+            }
             $.each(data, function (key, list) {
 
                 if (list.id === selectList) {
@@ -19,16 +35,16 @@ function getTodoList() {
                         '<td>' + list.name + '</td>' +
                         '<td><button onclick="editList(' + list.id + ')">Edit</button></td>' +
                         '<td><button onclick="deleteList(' + list.id + ')">Delete</button></td>' +
-                        '<td><button disabled onclick="SelectList(' + list.id + ')">Selected</button></td>' +
+                        '<td><button onclick="SelectList(' + list.id + ')">Selected</button></td>' +
                         '</tr>').appendTo($('#todoLists'));
                 }
                 else {
                     $('<tr>' +
-                    '<td>' + list.name + '</td>' +
-                    '<td><button onclick="editList(' + list.id + ')">Edit</button></td>' +
-                    '<td><button onclick="deleteList(' + list.id + ')">Delete</button></td>' +
-                    '<td><button onclick="SelectList(' + list.id + ')">Select</button></td>' +
-                    '</tr>').appendTo($('#todoLists'));
+                        '<td>' + list.name + '</td>' +
+                        '<td><button onclick="editList(' + list.id + ')">Edit</button></td>' +
+                        '<td><button onclick="deleteList(' + list.id + ')">Delete</button></td>' +
+                        '<td><button onclick="SelectList(' + list.id + ')">Select</button></td>' +
+                        '</tr>').appendTo($('#todoLists'));
                 }
                 
             });

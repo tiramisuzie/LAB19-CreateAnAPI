@@ -89,7 +89,7 @@ $('.my-list-form').on('submit', function () {
     return false;
 });
 
-function closeInput() {
+function closeListInput() {
     $('#listEdit').css({ 'display': 'none' });
 }
 

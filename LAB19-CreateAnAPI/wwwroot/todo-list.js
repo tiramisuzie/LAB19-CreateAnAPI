@@ -33,6 +33,7 @@ function deleteList(id) {
         type: 'DELETE',
         success: function (result) {
             getTodoList();
+            getData();
         }
     });
 }

@@ -77,13 +77,19 @@ namespace LAB19_CreateAnAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var todo = _context.TodoList.Find(id);
-            if (todo == null)
+            var todoList = _context.TodoList.Find(id);
+            if (todoList == null)
             {
                 return NotFound();
             }
+            _context.TodoList.Remove(todoList);
 
-            _context.TodoList.Remove(todo);
+            IQueryable<Todo> todos = _context.Todos.Where(x => x.ListId == id);
+            if (todos != null && todos.Count() > 0)
+            {
+                _context.Todos.RemoveRange(todos);
+            }
+
             _context.SaveChanges();
             return NoContent();
         }

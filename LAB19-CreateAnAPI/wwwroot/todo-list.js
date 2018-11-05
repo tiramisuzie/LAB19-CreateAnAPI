@@ -14,12 +14,23 @@ function getTodoList() {
             $('#todoLists').empty();
             $.each(data, function (key, list) {
 
-                $('<tr>' +
+                if (list.id === selectList) {
+                    $('<tr>' +
+                        '<td>' + list.name + '</td>' +
+                        '<td><button onclick="editList(' + list.id + ')">Edit</button></td>' +
+                        '<td><button onclick="deleteList(' + list.id + ')">Delete</button></td>' +
+                        '<td><button disabled onclick="SelectList(' + list.id + ')">Selected</button></td>' +
+                        '</tr>').appendTo($('#todoLists'));
+                }
+                else {
+                    $('<tr>' +
                     '<td>' + list.name + '</td>' +
                     '<td><button onclick="editList(' + list.id + ')">Edit</button></td>' +
                     '<td><button onclick="deleteList(' + list.id + ')">Delete</button></td>' +
                     '<td><button onclick="SelectList(' + list.id + ')">Select</button></td>' +
                     '</tr>').appendTo($('#todoLists'));
+                }
+                
             });
 
             todolists = data;
@@ -97,5 +108,5 @@ function closeListInput() {
 function SelectList(id) {
     selectList = id;
     getData();
-
+    getTodoList();
 }

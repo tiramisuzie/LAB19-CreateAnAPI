@@ -97,7 +97,7 @@ $('.my-list-form').on('submit', function () {
         }
     });
 
-    closeInput();
+    closeListInput();
     return false;
 });
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using LAB19CreateAnAPI.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,7 +31,7 @@ namespace LAB19_CreateAnAPI.Controllers
         [Produces("application/json")]
         public IEnumerable<Todo> Get()
         {
-            var items = _context.Todos;
+            var items = _context.Todos.Include("TodoList");
             return items;
         }
 
@@ -38,7 +39,7 @@ namespace LAB19_CreateAnAPI.Controllers
         [HttpGet("{id}", Name = "GetTodo")]
         public ActionResult<Todo> GetById(long id)
         {
-            var item = _context.Todos.Find(id);
+            var item = _context.Todos.Include("TodoList").FirstOrDefault(x => x.Id == id);
             if (item == null)
             {
                 return NotFound();

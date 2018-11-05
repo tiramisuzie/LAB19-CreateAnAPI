@@ -11,6 +11,8 @@ namespace LAB19CreateAnAPI.Data
         public bool IsComplete { get; set; }
 
         [ForeignKey("TodoList")]
-        public int ListId { get; set; }
+        public long ListId { get; set; }
+
+        public TodoList TodoList { get; set; }
     }
 }

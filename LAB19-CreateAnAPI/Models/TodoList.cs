@@ -8,6 +8,5 @@ namespace LAB19CreateAnAPI.Data
 
         public string Name { get; set; }
         
-        public ICollection<Todo> Items { get; set; }
     }
 }
